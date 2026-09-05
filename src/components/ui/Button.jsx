@@ -8,6 +8,7 @@ function Button({
 }) {
   const variants = {
     primary: `
+      w-[255px]
       bg-[#183A63]
       text-white
       hover:bg-[#214D80]
@@ -16,6 +17,7 @@ function Button({
     `,
 
     secondary: `
+      w-[255px]
       border
       border-[#183A63]
       bg-transparent
@@ -25,20 +27,24 @@ function Button({
       disabled:border-[#A8B7C7]
       disabled:text-[#A8B7C7]
     `,
+
     ghost: `
+      w-auto
       bg-transparent
       text-[#183A63]
       hover:bg-[#EAF0F6]
       active:bg-[#DCE6F0]
       disabled:text-[#A8B7C7]
     `,
-     text: `
-    bg-transparent
-    text-[#183A63]
-    hover:underline
-    active:text-[#102A49]
-    disabled:text-[#A8B7C7]
-  `,
+
+    text: `
+      w-auto
+      bg-transparent
+      text-[#183A63]
+      hover:underline
+      active:text-[#102A49]
+      disabled:text-[#A8B7C7]
+    `,
   }
 
   return (
@@ -48,7 +54,6 @@ function Button({
       disabled={disabled}
       className={`
         inline-flex
-        w-[255px]
         items-center
         justify-center
         px-6
