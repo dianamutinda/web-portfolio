@@ -1,4 +1,3 @@
-
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
@@ -50,11 +49,13 @@ function Navbar() {
         </nav>
 
         {/* Desktop CTA */}
-        <Link to="/appointment">
-          <Button className="hidden md:inline-flex">
-            Book a Discovery Call
-          </Button>
-        </Link>
+        <div className="hidden md:block">
+          <Link to="/appointment">
+            <Button className="w-auto">
+              Book a Discovery Call
+            </Button>
+          </Link>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -70,8 +71,8 @@ function Navbar() {
 
       {/* Mobile Navigation */}
       {open && (
-        <div className="border-t border-gray-200 bg-[#F7F7F8] px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="border-t border-gray-200 bg-[#F7F7F8] px-6 py-5 md:hidden">
+          <div className="flex flex-col gap-5">
             {links.map((link) => {
               const active = isActive(link.path)
 
@@ -95,8 +96,9 @@ function Navbar() {
             <Link
               to="/appointment"
               onClick={() => setOpen(false)}
+              className="block"
             >
-              <Button className="mt-2 w-full">
+              <Button className="mt-1 w-full">
                 Book a Discovery Call
               </Button>
             </Link>
@@ -108,4 +110,3 @@ function Navbar() {
 }
 
 export default Navbar
-

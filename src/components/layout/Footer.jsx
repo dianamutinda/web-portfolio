@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom"
-import { FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6"
+import {
+  FaLinkedinIn,
+  FaXTwitter,
+  FaTiktok,
+  FaInstagram,
+} from "react-icons/fa6"
 import { Mail, Phone, Clock } from "lucide-react"
 import Button from "../ui/Button"
 
@@ -21,28 +26,40 @@ function Footer() {
 
             {/* Social Links */}
             <div className="mt-6 flex items-center gap-3">
+              {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/in/diana-georgina-1220542b8/"
                 aria-label="LinkedIn"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition-colors hover:border-[#183A63] hover:text-[#183A63]"
               >
                 <FaLinkedinIn size={17} />
               </a>
 
+              {/* X */}
               <a
-                href="#"
+                href="https://x.com/diana254_codes"
                 aria-label="X"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition-colors hover:border-[#183A63] hover:text-[#183A63]"
               >
                 <FaXTwitter size={17} />
               </a>
 
+              {/* TikTok */}
               <a
-                href="#"
-                aria-label="YouTube"
+                href="https://www.tiktok.com/@diana_codes?lang=en"
+                aria-label="TikTok"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition-colors hover:border-[#183A63] hover:text-[#183A63]"
               >
-                <FaYoutube size={18} />
+                <FaTiktok size={17} />
+              </a>
+
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/diana_georginah/"
+                aria-label="Instagram"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition-colors hover:border-[#183A63] hover:text-[#183A63]"
+              >
+                <FaInstagram size={17} />
               </a>
             </div>
           </div>
@@ -91,40 +108,46 @@ function Footer() {
             </h3>
 
             <div className="mt-5 flex flex-col gap-4">
-
+              {/* Email */}
               <a
-                href="mailto:hello@dianaweb.com"
+                href="mailto:jaydiana25@gmail.com"
                 className="flex items-center gap-3 text-base text-gray-600 transition-colors hover:text-[#183A63]"
               >
                 <Mail
                   size={18}
                   className="shrink-0 text-[#183A63]"
                 />
-                <span>hello@dianaweb.com</span>
+
+                <span>jaydiana25@gmail.com</span>
               </a>
 
+              {/* Phone */}
               <a
-                href="tel:+254700000000"
+                href="tel:+254117659030"
                 className="flex items-center gap-3 text-base text-gray-600 transition-colors hover:text-[#183A63]"
               >
                 <Phone
                   size={18}
                   className="shrink-0 text-[#183A63]"
                 />
-                <span>+254 700 000 000</span>
+
+                <span>+254 117 659 030</span>
               </a>
 
+              {/* Hours */}
               <div className="flex items-center gap-3">
                 <Clock
                   size={18}
                   className="shrink-0 text-[#183A63]"
                 />
+
                 <span className="text-base text-gray-600">
-                  Mon–Fri, 9–5
+                  Mon – Fri, 9.00 am – 5.00 pm
                 </span>
               </div>
             </div>
 
+            {/* Booking CTA */}
             <div className="mt-6">
               <Link to="/appointment">
                 <Button variant="primary">
