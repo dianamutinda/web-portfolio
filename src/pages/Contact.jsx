@@ -1,10 +1,13 @@
-
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useForm, ValidationError } from "@formspree/react"
 import {
   Mail,
   MessageCircle,
   Clock,
   ArrowRight,
   CheckCircle2,
+  ChevronDown,
 } from "lucide-react"
 
 import Navbar from "../components/layout/Navbar"
@@ -21,6 +24,77 @@ function Eyebrow({ children }) {
 }
 
 export default function Contact() {
+  const [projectType, setProjectType] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [state, handleSubmit] = useForm("xvkobqnz")
+
+  const projectOptions = [
+    {
+      value: "new-website",
+      label: "New website",
+    },
+    {
+      value: "redesign",
+      label: "Redesign",
+    },
+    {
+      value: "improvements",
+      label: "Website improvements",
+    },
+    {
+      value: "not-sure",
+      label: "Not sure yet",
+    },
+  ]
+
+  const selectedOption = projectOptions.find(
+    (option) => option.value === projectType
+  )
+
+  // Success state
+  if (state.succeeded) {
+    return (
+      <>
+
+        <main>
+          <section className="px-6 py-24 md:py-32">
+            <div className="mx-auto max-w-[1176px]">
+              <div className="mx-auto max-w-2xl text-center">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#EAF0F6]">
+                  <CheckCircle2
+                    size={28}
+                    strokeWidth={1.8}
+                    className="text-[#183A63]"
+                  />
+                </div>
+
+                <h1 className="mt-6 text-4xl font-semibold tracking-tight text-gray-900 md:text-5xl">
+                  Thanks for reaching out.
+                </h1>
+
+                <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
+                  I've received your inquiry and will review the details before
+                  getting back to you with the next step.
+                </p>
+
+                <div className="mt-8">
+                  <Link to="/appointment">
+                    <Button>
+                      Book a Discovery Call
+                      <ArrowRight size={18} />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+      </>
+    )
+  }
+
   return (
     <>
 
@@ -61,7 +135,7 @@ export default function Contact() {
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name */}
                   <div>
                     <label
@@ -76,7 +150,15 @@ export default function Contact() {
                       name="name"
                       type="text"
                       placeholder="Your name"
+                      required
                       className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#183A63] focus:ring-1 focus:ring-[#183A63]"
+                    />
+
+                    <ValidationError
+                      prefix="Name"
+                      field="name"
+                      errors={state.errors}
+                      className="mt-2 text-sm text-red-600"
                     />
                   </div>
 
@@ -94,7 +176,15 @@ export default function Contact() {
                       name="email"
                       type="email"
                       placeholder="you@company.com"
+                      required
                       className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#183A63] focus:ring-1 focus:ring-[#183A63]"
+                    />
+
+                    <ValidationError
+                      prefix="Email"
+                      field="email"
+                      errors={state.errors}
+                      className="mt-2 text-sm text-red-600"
                     />
                   </div>
 
@@ -112,12 +202,20 @@ export default function Contact() {
                       name="business"
                       type="text"
                       placeholder="Your business name"
+                      required
                       className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#183A63] focus:ring-1 focus:ring-[#183A63]"
+                    />
+
+                    <ValidationError
+                      prefix="Business"
+                      field="business"
+                      errors={state.errors}
+                      className="mt-2 text-sm text-red-600"
                     />
                   </div>
 
                   {/* Project Type */}
-                  <div>
+                  <div className="relative">
                     <label
                       htmlFor="project-type"
                       className="mb-2 block text-sm font-medium text-gray-900"
@@ -125,22 +223,77 @@ export default function Contact() {
                       What do you need?
                     </label>
 
-                    <select
-                      id="project-type"
+                    {/* Sends selected value with the form */}
+                    <input
+                      type="hidden"
                       name="project-type"
-                      defaultValue=""
-                      className="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-900 outline-none transition focus:border-[#183A63] focus:ring-1 focus:ring-[#183A63]"
+                      value={projectType}
+                    />
+
+                    {/* Dropdown Button */}
+                    <button
+                      type="button"
+                      id="project-type"
+                      aria-haspopup="listbox"
+                      aria-expanded={isOpen}
+                      onClick={() => setIsOpen(!isOpen)}
+                      className={`flex w-full items-center justify-between rounded-xl border bg-white px-4 py-3.5 text-left outline-none transition ${
+                        isOpen
+                          ? "border-[#183A63] ring-1 ring-[#183A63]"
+                          : "border-gray-300 hover:border-gray-400"
+                      }`}
                     >
-                      <option value="" disabled>
-                        Select an option
-                      </option>
-                      <option value="new-website">New website</option>
-                      <option value="redesign">Redesign</option>
-                      <option value="improvements">
-                        Website improvements
-                      </option>
-                      <option value="not-sure">Not sure yet</option>
-                    </select>
+                      <span
+                        className={
+                          selectedOption
+                            ? "text-gray-900"
+                            : "text-gray-400"
+                        }
+                      >
+                        {selectedOption?.label || "Select an option"}
+                      </span>
+
+                      <ChevronDown
+                        size={18}
+                        strokeWidth={1.8}
+                        className={`shrink-0 text-[#183A63] transition-transform duration-200 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Dropdown Menu */}
+                    {isOpen && (
+                      <div
+                        role="listbox"
+                        className="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white p-1.5 shadow-lg"
+                      >
+                        {projectOptions.map((option) => {
+                          const isSelected =
+                            projectType === option.value
+
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              role="option"
+                              aria-selected={isSelected}
+                              onClick={() => {
+                                setProjectType(option.value)
+                                setIsOpen(false)
+                              }}
+                              className={`w-full rounded-lg px-3.5 py-3 text-left text-sm transition ${
+                                isSelected
+                                  ? "bg-[#183A63] text-white"
+                                  : "text-gray-700 hover:bg-[#F7F7F8] hover:text-[#183A63]"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    )}
                   </div>
 
                   {/* Message */}
@@ -157,19 +310,30 @@ export default function Contact() {
                       name="message"
                       rows="6"
                       placeholder="What are you trying to achieve with your website?"
+                      required
                       className="w-full resize-none rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#183A63] focus:ring-1 focus:ring-[#183A63]"
+                    />
+
+                    <ValidationError
+                      prefix="Message"
+                      field="message"
+                      errors={state.errors}
+                      className="mt-2 text-sm text-red-600"
                     />
                   </div>
 
-                  <Button type="submit">
-                    Send inquiry
-                    <ArrowRight size={18} />
+                  {/* Submit */}
+                  <Button type="submit" disabled={state.submitting}>
+                    {state.submitting ? "Sending..." : "Send inquiry"}
+
+                    {!state.submitting && <ArrowRight size={18} />}
                   </Button>
                 </form>
               </div>
 
               {/* Contact Options */}
               <aside className="lg:pt-16">
+                {/* Email */}
                 <div className="border-t border-gray-300 pt-8">
                   <div className="flex gap-4">
                     <Mail
@@ -190,6 +354,7 @@ export default function Contact() {
                   </div>
                 </div>
 
+                {/* WhatsApp */}
                 <div className="mt-8 border-t border-gray-300 pt-8">
                   <div className="flex gap-4">
                     <MessageCircle
@@ -210,6 +375,7 @@ export default function Contact() {
                   </div>
                 </div>
 
+                {/* Availability */}
                 <div className="mt-8 border-t border-gray-300 pt-8">
                   <div className="flex gap-4">
                     <Clock
@@ -324,6 +490,7 @@ export default function Contact() {
               </div>
 
               <div className="divide-y divide-gray-200">
+                {/* FAQ 1 */}
                 <div className="py-8 first:pt-0">
                   <div className="flex gap-4">
                     <CheckCircle2
@@ -346,6 +513,7 @@ export default function Contact() {
                   </div>
                 </div>
 
+                {/* FAQ 2 */}
                 <div className="py-8">
                   <div className="flex gap-4">
                     <CheckCircle2
@@ -367,6 +535,7 @@ export default function Contact() {
                   </div>
                 </div>
 
+                {/* FAQ 3 */}
                 <div className="py-8 last:pb-0">
                   <div className="flex gap-4">
                     <CheckCircle2
@@ -393,22 +562,34 @@ export default function Contact() {
         </section>
 
         {/* Closing CTA */}
-        <section className="px-6 py-24 md:py-32">
+        <section className="px-6 py-20">
           <div className="mx-auto max-w-[1176px]">
-            <div className="rounded-3xl bg-[#183A63] px-8 py-16 text-center text-white md:px-16">
-              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-                Let's talk about what your website needs to do.
-              </h2>
+            <div className="rounded-2xl bg-[#183A63] px-6 py-16 text-center text-white sm:px-10 md:py-20">
+              <div className="mx-auto max-w-2xl">
+                <div className="mb-6 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wider text-white/70">
+                  <span className="h-px w-6 bg-white/50" />
 
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/75">
-                Start with where you are. I'll help you work out what comes
-                next.
-              </p>
+                  READY TO TALK?
 
-              <div className="mt-8">
-                <Button variant="secondary">
-                  Book a Discovery Call
-                </Button>
+                  <span className="h-px w-6 bg-white/50" />
+                </div>
+
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                  Let's talk about what your website needs to do.
+                </h2>
+
+                <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                  Start with where you are. I'll help you work out what comes
+                  next.
+                </p>
+
+                <div className="mt-7">
+                  <Link to="/appointment">
+                    <Button variant="light">
+                      Book a Discovery Call
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -418,4 +599,3 @@ export default function Contact() {
     </>
   )
 }
-

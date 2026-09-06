@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom"
 import { FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6"
 import { Mail, Phone, Clock } from "lucide-react"
 import Button from "../ui/Button"
@@ -54,26 +54,33 @@ function Footer() {
             </h3>
 
             <nav className="mt-5 flex flex-col gap-3">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-base text-gray-600 transition-colors hover:text-[#183A63]"
               >
                 Home
-              </a>
+              </Link>
 
-              <a
-                href="/about"
+              <Link
+                to="/about"
                 className="text-base text-gray-600 transition-colors hover:text-[#183A63]"
               >
                 About
-              </a>
+              </Link>
 
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="text-base text-gray-600 transition-colors hover:text-[#183A63]"
               >
                 Contact
-              </a>
+              </Link>
+
+              <Link
+                to="/appointment"
+                className="text-base text-gray-600 transition-colors hover:text-[#183A63]"
+              >
+                Book a Call
+              </Link>
             </nav>
           </div>
 
@@ -85,25 +92,27 @@ function Footer() {
 
             <div className="mt-5 flex flex-col gap-4">
 
-              <div className="flex items-center gap-3">
+              <a
+                href="mailto:hello@dianaweb.com"
+                className="flex items-center gap-3 text-base text-gray-600 transition-colors hover:text-[#183A63]"
+              >
                 <Mail
                   size={18}
                   className="shrink-0 text-[#183A63]"
                 />
-                <span className="text-base text-gray-600">
-                  hello@dianaweb.com
-                </span>
-              </div>
+                <span>hello@dianaweb.com</span>
+              </a>
 
-              <div className="flex items-center gap-3">
+              <a
+                href="tel:+254700000000"
+                className="flex items-center gap-3 text-base text-gray-600 transition-colors hover:text-[#183A63]"
+              >
                 <Phone
                   size={18}
                   className="shrink-0 text-[#183A63]"
                 />
-                <span className="text-base text-gray-600">
-                  +254 700 000 000
-                </span>
-              </div>
+                <span>+254 700 000 000</span>
+              </a>
 
               <div className="flex items-center gap-3">
                 <Clock
@@ -117,9 +126,11 @@ function Footer() {
             </div>
 
             <div className="mt-6">
-              <Button variant="primary">
-                Book a Discovery Call
-              </Button>
+              <Link to="/appointment">
+                <Button variant="primary">
+                  Book a Discovery Call
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

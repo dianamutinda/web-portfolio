@@ -1,4 +1,3 @@
-
 import {
   BriefcaseBusiness,
   Globe,
@@ -27,6 +26,13 @@ function Eyebrow({ children, light = false }) {
 }
 
 export default function Appointment() {
+  const scrollToBooking = () => {
+    document.getElementById("booking")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+
   return (
     <>
 
@@ -42,12 +48,12 @@ export default function Appointment() {
               </h1>
 
               <p className="mt-8 max-w-2xl text-lg leading-8 text-gray-600">
-                A 30-minute conversation to understand your business, what
+                A 1-hour conversation to understand your business, what
                 isn't working, and what your website needs to accomplish.
               </p>
 
               <div className="mt-10">
-                <Button>
+                <Button onClick={scrollToBooking}>
                   Choose a time
                   <span aria-hidden="true">→</span>
                 </Button>
@@ -129,7 +135,10 @@ export default function Appointment() {
         </section>
 
         {/* Booking Area */}
-        <section className="px-6 py-24 md:py-32">
+        <section
+          id="booking"
+          className="scroll-mt-20 px-6 py-24 md:py-32"
+        >
           <div className="mx-auto max-w-[1176px]">
             <div className="mb-10">
               <Eyebrow>FIND A TIME</Eyebrow>
@@ -137,9 +146,21 @@ export default function Appointment() {
               <h2 className="text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">
                 Choose a time that works for you.
               </h2>
+
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500">
+                <span>1 hour</span>
+
+                <span className="h-1 w-1 rounded-full bg-gray-300" />
+
+                <span>Google Meet</span>
+
+                <span className="h-1 w-1 rounded-full bg-gray-300" />
+
+                <span>Free discovery call</span>
+              </div>
             </div>
 
-            {/* Google Calendar */}
+            {/* Google Calendar Booking */}
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
               <iframe
                 src="https://calendar.app.google/VvqNGCzwb1p74LYx8"
@@ -231,6 +252,7 @@ export default function Appointment() {
           </div>
         </section>
       </main>
+
     </>
   )
 }

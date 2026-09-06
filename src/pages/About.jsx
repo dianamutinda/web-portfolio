@@ -1,4 +1,3 @@
-
 import {
   Compass,
   Focus,
@@ -7,6 +6,7 @@ import {
   Lightbulb,
   ListChecks,
 } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import Navbar from "../components/layout/Navbar"
 import Footer from "../components/layout/Footer"
@@ -24,7 +24,6 @@ function Eyebrow({ children }) {
 export default function About() {
   return (
     <>
-      
 
       <main>
         {/* Hero */}
@@ -50,7 +49,9 @@ export default function About() {
               </p>
 
               <div className="mt-10">
-                <Button>Book a Discovery Call</Button>
+                <Link to="/appointment">
+                  <Button>Book a Discovery Call</Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -69,7 +70,8 @@ export default function About() {
               </div>
 
               <div className="grid gap-6 md:grid-cols-3">
-                <div className="rounded-2xl border border-gray-200 bg-white p-6">
+                {/* Clarity */}
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#183A63]/30 hover:shadow-md">
                   <Compass
                     size={28}
                     strokeWidth={1.8}
@@ -85,11 +87,9 @@ export default function About() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-[#183A63] bg-[#183A63] p-6 text-white">
-                  <Focus
-                    size={28}
-                    strokeWidth={1.8}
-                  />
+                {/* Purpose */}
+                <div className="rounded-2xl border border-[#183A63] bg-[#183A63] p-6 text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+                  <Focus size={28} strokeWidth={1.8} />
 
                   <h3 className="mt-8 text-xl font-semibold">
                     Purpose
@@ -101,7 +101,8 @@ export default function About() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-gray-200 bg-white p-6">
+                {/* Usability */}
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#183A63]/30 hover:shadow-md">
                   <MousePointerClick
                     size={28}
                     strokeWidth={1.8}
@@ -307,30 +308,40 @@ export default function About() {
         </section>
 
         {/* Closing CTA */}
-        <section className="px-6 py-24 md:py-32">
+        <section className="px-6 py-20">
           <div className="mx-auto max-w-[1176px]">
-            <div className="rounded-3xl bg-[#183A63] px-8 py-16 text-center text-white md:px-16">
-              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-                Let's build a website that works for your business.
-              </h2>
+            <div className="rounded-2xl bg-[#183A63] px-6 py-16 text-center text-white sm:px-10 md:py-20">
+              <div className="mx-auto max-w-2xl">
+                <div className="mb-6 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wider text-white/70">
+                  <span className="h-px w-6 bg-white/50" />
+                  READY TO TALK?
+                  <span className="h-px w-6 bg-white/50" />
+                </div>
 
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/75">
-                Tell me what you're building, what isn't working, or what you
-                need your website to accomplish.
-              </p>
+                <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                  Let's build a website that works for your business.
+                </h2>
 
-              <div className="mt-8">
-                <Button variant="secondary">
-                  Book a Discovery Call
-                </Button>
+                <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                  Tell me what you're building, what isn't working, or what
+                  you need your website to accomplish.
+                </p>
+
+                <div className="mt-7">
+                  <Link to="/appointment">
+                    <Button
+                      variant="light"
+                      className="bg-white text-[#183A63] hover:bg-[#EAF0F6] active:bg-[#DCE5EE]"
+                    >
+                      Book a Discovery Call
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </main>
-
-    
     </>
   )
 }
-

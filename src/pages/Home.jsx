@@ -14,32 +14,30 @@ import {
   Eye,
 } from "lucide-react"
 
-function Eyebrow({ children }) {
+import { Link } from "react-router-dom"
+import Button from "../components/ui/Button"
+
+function Eyebrow({ children, light = false }) {
   return (
     <div className="mb-3 flex items-center gap-2">
-      <span className="h-px w-6 bg-[#183A63]" />
-      <span className="text-xs font-semibold tracking-wide text-[#183A63]">
+      <span
+        className={`h-px w-6 ${
+          light ? "bg-white/50" : "bg-[#183A63]"
+        }`}
+      />
+
+      <span
+        className={`text-xs font-semibold tracking-wide ${
+          light ? "text-white/70" : "text-[#183A63]"
+        }`}
+      >
         {children}
       </span>
     </div>
   )
 }
 
-function PrimaryButton({ children, className = "", ...props }) {
-  return (
-    <button
-      {...props}
-      className={
-        "inline-flex items-center justify-center rounded-md bg-[#183A63] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#122c4c] " +
-        className
-      }
-    >
-      {children}
-    </button>
-  )
-}
-
-function Home({ setPage }) {
+function Home() {
   const problemCards = [
     {
       icon: Globe,
@@ -141,29 +139,33 @@ function Home({ setPage }) {
     <>
       {/* Hero */}
       <section className="px-6 pb-20 pt-20 text-center">
-        <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-tight text-gray-900 sm:text-5xl">
-          Websites that communicate for your business.
-        </h1>
+        <div className="mx-auto max-w-[1176px]">
+          <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-tight text-gray-900 sm:text-5xl">
+            Websites that communicate for your business.
+          </h1>
 
-        <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-gray-500">
-          I build clear, functional websites around your business and your
-          customers, making important information easy to find and helping
-          people take the next step with confidence.
-        </p>
+          <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-gray-500">
+            I build clear, functional websites around your business and your
+            customers, making important information easy to find and helping
+            people take the next step with confidence.
+          </p>
 
-        <div className="mt-7">
-          <PrimaryButton onClick={() => setPage("about")}>
-            Book a Discovery Call
-          </PrimaryButton>
+          <div className="mt-7">
+            <Link to="/appointment">
+              <Button>
+                Book a Discovery Call
+              </Button>
+            </Link>
+          </div>
+
+          <p className="mt-4 text-xs text-gray-400">
+            Built around your business, designed around your customers.
+          </p>
         </div>
-
-        <p className="mt-4 text-xs text-gray-400">
-          Built around your business, designed around your customers.
-        </p>
       </section>
 
       {/* Problem */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section className="mx-auto max-w-[1176px] px-6 py-16">
         <Eyebrow>THE PROBLEM</Eyebrow>
 
         <h2 className="max-w-2xl text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -184,27 +186,28 @@ function Home({ setPage }) {
             ({ icon: Icon, num, title, body, highlight }) => (
               <div
                 key={num}
-                className={
-                  "rounded-lg border p-6 " +
-                  (highlight
-                    ? "border-[#183A63] bg-[#183A63] text-white"
-                    : "border-gray-200 bg-white")
-                }
+                className={`group rounded-lg border p-6 transition-all duration-200 ${
+                  highlight
+                    ? "border-[#183A63] bg-[#183A63] text-white hover:-translate-y-1 hover:shadow-lg"
+                    : "border-gray-200 bg-white hover:-translate-y-1 hover:border-[#183A63]/30 hover:shadow-lg"
+                }`}
               >
                 <span
-                  className={
-                    "flex h-9 w-9 items-center justify-center rounded-full " +
-                    (highlight ? "bg-white/15" : "bg-[#183A63]")
-                  }
+                  className={`flex h-9 w-9 items-center justify-center rounded-full ${
+                    highlight
+                      ? "bg-white/15"
+                      : "bg-[#183A63]"
+                  }`}
                 >
                   <Icon size={16} className="text-white" />
                 </span>
 
                 <p
-                  className={
-                    "mt-4 text-xs font-semibold " +
-                    (highlight ? "text-white/70" : "text-[#183A63]")
-                  }
+                  className={`mt-4 text-xs font-semibold ${
+                    highlight
+                      ? "text-white/70"
+                      : "text-[#183A63]"
+                  }`}
                 >
                   {num}
                 </p>
@@ -214,19 +217,19 @@ function Home({ setPage }) {
                 </h3>
 
                 <div
-                  className={
-                    "my-3 h-px w-8 " +
-                    (highlight ? "bg-white/30" : "bg-gray-200")
-                  }
+                  className={`my-3 h-px w-8 ${
+                    highlight
+                      ? "bg-white/30"
+                      : "bg-gray-200"
+                  }`}
                 />
 
                 <p
-                  className={
-                    "text-xs leading-relaxed " +
-                    (highlight
+                  className={`text-xs leading-relaxed ${
+                    highlight
                       ? "text-white/85"
-                      : "text-gray-500")
-                  }
+                      : "text-gray-500"
+                  }`}
                 >
                   {body}
                 </p>
@@ -237,7 +240,7 @@ function Home({ setPage }) {
       </section>
 
       {/* My Approach */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section className="mx-auto max-w-[1176px] px-6 py-16">
         <Eyebrow>MY APPROACH</Eyebrow>
 
         <h2 className="max-w-2xl text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -268,7 +271,7 @@ function Home({ setPage }) {
       </section>
 
       {/* Process */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section className="mx-auto max-w-[1176px] px-6 py-16">
         <Eyebrow>THE PROCESS</Eyebrow>
 
         <h2 className="max-w-2xl text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -283,7 +286,10 @@ function Home({ setPage }) {
 
         <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 md:grid-cols-3">
           {process.map(({ icon: Icon, num, title, body }) => (
-            <div key={num}>
+            <div
+              key={num}
+              className="transition-transform duration-200 hover:-translate-y-0.5"
+            >
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#183A63]">
                 <Icon size={16} className="text-white" />
               </span>
@@ -301,7 +307,7 @@ function Home({ setPage }) {
       </section>
 
       {/* What That Means */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section className="mx-auto max-w-[1176px] px-6 py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -339,20 +345,28 @@ function Home({ setPage }) {
       </section>
 
       {/* Closing CTA */}
-      <section className="px-6 py-20 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-          Ready to talk about your website?
-        </h2>
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-[1176px]">
+          <div className="rounded-2xl bg-[#183A63] px-6 py-16 text-center sm:px-10 md:py-20">
+            
 
-        <p className="mx-auto mt-3 max-w-md text-sm text-gray-500">
-          Tell me about your business and what you need your website to
-          accomplish — no pressure, just a conversation.
-        </p>
+            <h2 className="mx-auto max-w-2xl text-2xl font-bold text-white sm:text-3xl">
+              Ready to talk about your website?
+            </h2>
 
-        <div className="mt-6">
-          <PrimaryButton>
-            Book a Discovery Call
-          </PrimaryButton>
+            <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/70">
+              Tell me about your business and what you need your website to
+              accomplish — no pressure, just a conversation.
+            </p>
+
+            <div className="mt-7 ">
+             <Link to="/appointment">
+  <Button variant="light">
+    Book a Discovery Call
+  </Button>
+</Link>
+            </div>
+          </div>
         </div>
       </section>
     </>
